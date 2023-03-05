@@ -10,7 +10,7 @@ namespace MT.WebApi.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        [HttpPost]
+        [HttpPost("signin")]
         public async Task<ActionResult<SignInToken>> GetJWTBearerToken(string email, string password)
         {
             var client = new HttpClient();
@@ -21,7 +21,7 @@ namespace MT.WebApi.Controllers
 
             var response = await client.PostAsync("http://217.13.111.9:5010/Authentication/SignIn", data);
 
-            var result = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<SignInToken>(await response.Content.ReadAsStringAsync());
 
             return Ok(result);
         }
