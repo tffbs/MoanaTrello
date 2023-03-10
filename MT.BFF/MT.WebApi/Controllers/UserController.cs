@@ -10,16 +10,22 @@ namespace MT.WebApi.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        [HttpPost("signin")]
-        public async Task<ActionResult<SignInToken>> GetJWTBearerToken(string email, string password)
-        {
-            var client = new HttpClient();
+        private readonly HttpClient _httpClient;
 
-            var json = JsonConvert.SerializeObject(new User(email, password));
+        public UserController()
+        {
+            _httpClient = new HttpClient();
+        }
+
+        [HttpPost("signin")]
+        public async Task<ActionResult<SignInToken>> GetJWTBearerToken([FromBody] User user)
+        {
+
+            var json = JsonConvert.SerializeObject(user);
 
             var data = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await client.PostAsync("http://217.13.111.9:5010/Authentication/SignIn", data);
+            var response = await _httpClient.PostAsync("http://217.13.111.9:5010/Authentication/SignIn", data);
 
             var result = JsonConvert.DeserializeObject<SignInToken>(await response.Content.ReadAsStringAsync());
 
