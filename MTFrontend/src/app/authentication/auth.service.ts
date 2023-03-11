@@ -12,7 +12,8 @@ export class AuthService {
       .post<LoginResponse>(
         'http://localhost:5078/api/User/signin',{
           email: email,
-          password: password})
+          password: password
+        })
       .subscribe((response) => {
         if(response === undefined || response === null){
           return false

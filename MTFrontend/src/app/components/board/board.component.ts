@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
+import {CardListItem} from "../../shared/models/CardListItem";
 
 
 @Component({
@@ -8,26 +9,54 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag
   styleUrls: ['./board.component.scss']
 })
 export class BoardComponent {
-  pendingTasks = [{ name: 'Task 1' }, { name: 'Task 2' }, { name: 'Task 3' }];
-  inProgressTasks = [{ name: 'Task 4' }, { name: 'Task 5' }, { name: 'Task 6' }];
-  blockedTasks = [{ name: 'Task 7' }, { name: 'Task 8' }, { name: 'Task 9' }];
-  doneTasks = [{ name: 'Task 10' }, { name: 'Task 11' }, { name: 'Task 12' }];
+
+  pendingTasks: CardListItem[] = [
+    {id: '1', title: 'Title1', description: 'Description1', status: 0, position: 0},
+    {id: '2', title: 'Title2', description: 'Destion1', status: 0, position: 1},
+    {id: '3', title: 'Title3', description: 'Descriptn1', status: 0, position: 2}
+  ];
+  inProgressTasks: CardListItem[] = [
+    {id: '4', title: 'Title4', description: 'scription1', status: 1, position: 0},
+    {id: '5', title: 'Title5', description: 'Description1', status: 1, position: 1},
+    {id: '6', title: 'Title6', description: 'Desption1', status: 1, position: 2}
+  ];
+  blockedTasks: CardListItem[] = [
+    {id: '7', title: 'Title7', description: 'Descripon1', status: 2, position: 0},
+    {id: '8', title: 'Title8', description: 'Descriion1', status: 2, position: 1},
+    {id: '9', title: 'Title9', description: 'Deription1', status: 2, position: 2}
+  ];
+  doneTasks: CardListItem[] = [
+    {id: '1', title: 'Title1', description: 'Description1', status: 3, position: 0},
+    {id: '1', title: 'Title1', description: 'Description1', status: 3, position: 1},
+    {id: '1', title: 'Title1', description: 'Description1', status: 3, position: 2}
+  ];
 
   onDrop(event: CdkDragDrop<any>) {
     console.log(event);
-    console.log(event.container);
-    console.log(event.previousContainer);
     if (event.container._dropListRef === event.previousContainer._dropListRef) {
-      // move within the same column
+
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      event.container.data.forEach((card: any, position: any) => {
+        this.updatePosition(card, position);
+      });
     } else {
-      // move to a different column
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         event.currentIndex
       );
+      this.updateStatus(event.item.data, +event.container.id.slice(-1));
     }
+  }
+
+  updatePosition(card: CardListItem, position: number): void {
+    console.log(card);
+    console.log(position);
+  }
+
+  updateStatus(card: CardListItem, status: number): void{
+    console.log(card);
+    console.log(status);
   }
 }
