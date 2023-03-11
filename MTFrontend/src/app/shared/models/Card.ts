@@ -4,8 +4,8 @@ export interface Card{
   description: string,
   status: number,
   position: number,
-  createdAt: Date,
-  modifiedAt: Date,
+  createdAt: string,
+  modifiedAt: string,
   ownerId: string,
   asigneeId: string
 }

@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
 import {CardListItem} from "../../shared/models/CardListItem";
+import {MatDialog} from "@angular/material/dialog";
+import {CardDisplayComponent} from "../card-display/card-display.component";
+import {Card} from "../../shared/models/Card";
+import {CardEditorComponent} from "../card-editor/card-editor.component";
 
 
 @Component({
@@ -31,6 +35,9 @@ export class BoardComponent {
     {id: '1', title: 'Title1', description: 'Description1', status: 3, position: 2}
   ];
 
+  constructor(private readonly dialog: MatDialog) {
+  }
+
   onDrop(event: CdkDragDrop<any>) {
     console.log(event);
     if (event.container._dropListRef === event.previousContainer._dropListRef) {
@@ -46,6 +53,7 @@ export class BoardComponent {
         event.previousIndex,
         event.currentIndex
       );
+      // this does not work if the columns are in a different order...
       this.updateStatus(event.item.data, +event.container.id.slice(-1));
     }
   }
@@ -58,5 +66,14 @@ export class BoardComponent {
   updateStatus(card: CardListItem, status: number): void{
     console.log(card);
     console.log(status);
+  }
+
+  open(card: CardListItem): void{
+    const dialogRef = this.dialog.open(CardDisplayComponent);
+  }
+
+  edit(card: CardListItem): void{
+    console.log('clickedEdit');
+    const dialogRef = this.dialog.open(CardEditorComponent);
   }
 }

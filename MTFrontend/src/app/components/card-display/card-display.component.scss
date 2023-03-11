@@ -1,6 +1,14 @@
-.center{
-  display: grid;
+.center {
+  display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
+}
+
+mat-card {
+  width: 60%
+}
+
+mat-divider {
+  margin: 20px;
 }

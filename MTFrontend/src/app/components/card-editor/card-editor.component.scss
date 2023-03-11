@@ -1,6 +1,24 @@
-.center{
-  display: grid;
-  justify-content: center;
+//.center{
+//  display: grid;
+//  justify-content: center;
+//  align-items: center;
+//  height: 100%;
+//}
+
+
+.form-center {
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  height: 100%;
+  padding: 16px;
+}
+
+
+.mat-form-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+button[type="submit"] {
+  margin-top: 16px;
 }

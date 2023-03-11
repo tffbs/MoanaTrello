@@ -16,6 +16,8 @@ import {MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
 import { CardDisplayComponent } from './components/card-display/card-display.component';
 import {MatCardModule} from "@angular/material/card";
+import {MatDivider, MatDividerModule} from "@angular/material/divider";
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import {MatCardModule} from "@angular/material/card";
     MatIconModule,
     MatOptionModule,
     MatSelectModule,
-    MatCardModule
+    MatCardModule,
+    MatDividerModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

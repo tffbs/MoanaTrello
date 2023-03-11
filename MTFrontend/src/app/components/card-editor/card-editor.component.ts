@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-card-editor',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./card-editor.component.scss']
 })
 export class CardEditorComponent {
+  cardEditForm = new FormGroup({
 
+  });
 }

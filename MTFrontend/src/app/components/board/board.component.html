@@ -6,7 +6,16 @@
        [cdkDropListConnectedTo]="[inProgressColumn, blockedColumn, doneColumn]"
        (cdkDropListDropped)="onDrop($event)">
     <h2>Pending</h2>
-    <div class="card" *ngFor="let task of pendingTasks" cdkDrag [cdkDragData]="task">{{task.title}}</div>
+    <div class="card" *ngFor="let task of pendingTasks" cdkDrag [cdkDragData]="task">
+      <div class="container">
+        <div (click)="open(task)" class="title">
+          {{task.title}}
+        </div>
+        <div (click)="edit(task)" class="edit-icon">
+          <mat-icon>edit</mat-icon>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="board-column"
        cdkDropList
@@ -15,7 +24,16 @@
        [cdkDropListConnectedTo]="[pendingColumn, blockedColumn, doneColumn]"
        (cdkDropListDropped)="onDrop($event)">
     <h2>In Progress</h2>
-    <div class="card" *ngFor="let task of inProgressTasks" cdkDrag [cdkDragData]="task">{{task.title}}</div>
+    <div class="card" *ngFor="let task of inProgressTasks" cdkDrag [cdkDragData]="task">
+      <div class="container">
+        <div (click)="open(task)" class="title">
+          {{task.title}}
+        </div>
+        <div (click)="edit(task)" class="edit-icon">
+          <mat-icon>edit</mat-icon>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="board-column"
        cdkDropList
@@ -24,7 +42,16 @@
        [cdkDropListConnectedTo]="[pendingColumn, inProgressColumn, doneColumn]"
        (cdkDropListDropped)="onDrop($event)">
     <h2>Blocked</h2>
-    <div class="card" *ngFor="let task of blockedTasks" cdkDrag [cdkDragData]="task">{{task.title}}</div>
+    <div class="card" *ngFor="let task of blockedTasks" cdkDrag [cdkDragData]="task">
+      <div class="container">
+        <div (click)="open(task)" class="title">
+          {{task.title}}
+        </div>
+        <div (click)="edit(task)" class="edit-icon">
+          <mat-icon>edit</mat-icon>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="board-column"
        cdkDropList
@@ -33,6 +60,15 @@
        [cdkDropListConnectedTo]="[pendingColumn, inProgressColumn, blockedColumn]"
        (cdkDropListDropped)="onDrop($event)">
     <h2>Done</h2>
-    <div class="card" *ngFor="let task of doneTasks" cdkDrag [cdkDragData]="task">{{task.title}}</div>
+    <div class="card" *ngFor="let task of doneTasks" cdkDrag [cdkDragData]="task">
+      <div class="container">
+        <div (click)="open(task)" class="title">
+          {{task.title}}
+        </div>
+        <div (click)="edit(task)" class="edit-icon">
+          <mat-icon>edit</mat-icon>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
