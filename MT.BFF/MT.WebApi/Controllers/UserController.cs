@@ -10,11 +10,11 @@ namespace MT.WebApi.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly HttpClient _httpClient;
+        private readonly IHttpClientFactory _httpClientFactory;
 
-        public UserController()
+        public UserController(IHttpClientFactory httpClientFactory)
         {
-            _httpClient = new HttpClient();
+            _httpClientFactory = httpClientFactory;
         }
 
         [HttpPost("signin")]
@@ -25,7 +25,9 @@ namespace MT.WebApi.Controllers
 
             var data = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await _httpClient.PostAsync("http://217.13.111.9:5010/Authentication/SignIn", data);
+            var client = _httpClientFactory.CreateClient();
+
+            var response = await client.PostAsync("http://217.13.111.9:5010/Authentication/SignIn", data);
 
             var result = JsonConvert.DeserializeObject<SignInToken>(await response.Content.ReadAsStringAsync());
 
